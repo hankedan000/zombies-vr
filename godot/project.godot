@@ -26,16 +26,25 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Zombies VR"
+config/name="ZombiesVR"
 run/main_scene="res://Main.tscn"
 
 [autoload]
 
 vr="*res://OQ_Toolkit/vr_autoload.gd"
+TheWorld="*res://TheWorld.gd"
 
 [gdnative]
 
 singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
+
+[layer_names]
+
+3d_physics/layer_1="ground"
+3d_physics/layer_2="zombies"
+3d_physics/layer_3="player"
+3d_physics/layer_4="bullets"
+3d_physics/layer_5="scenery"
 
 [rendering]
 

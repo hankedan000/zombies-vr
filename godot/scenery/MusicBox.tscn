@@ -13,6 +13,8 @@ albedo_color = Color( 0.239216, 0.411765, 1, 1 )
 extents = Vector3( 0.100965, 0.100211, 0.0988226 )
 
 [node name="MusicBox" type="RigidBody"]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource( 2 )
 
 [node name="Box" type="MeshInstance" parent="."]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://enemies/Zombie.tscn" type="PackedScene" id=1]
+[ext_resource path="res://materials/BasicZombieGreen.tres" type="Material" id=2]
+[ext_resource path="res://sounds/brains_long.ogg" type="AudioStream" id=3]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.4, 0.15, 1.4 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.05, 0.5, 0.05 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.207055, 0.699261, 0.0735722 )
+
+[node name="BasicZombie" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
+collision_layer = 2
+collision_mask = 31
+spawn_sound_stream = ExtResource( 3 )
+
+[node name="Body" type="MeshInstance" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.695032, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="ArmRight" type="MeshInstance" parent="." index="1"]
+transform = Transform( 1, -1.43714e-09, -3.79364e-08, 3.77392e-08, 0.146118, 0.989268, 4.12146e-09, -0.989268, 0.146118, -0.245519, 1.28775, -0.224622 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="ArmLeft" type="MeshInstance" parent="." index="2"]
+transform = Transform( 1, -1.54569e-09, -3.86607e-08, 3.8454e-08, 0.15026, 0.988647, 4.28103e-09, -0.988647, 0.15026, 0.244744, 1.28775, -0.224581 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693357, 0 )
+shape = SubResource( 3 )

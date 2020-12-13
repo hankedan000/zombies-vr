@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenery/Gun.gd" type="Script" id=1]
+[ext_resource path="res://weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://materials/GunMetal.tres" type="Material" id=2]
 [ext_resource path="res://sounds/laser_gun.ogg" type="AudioStream" id=3]
-[ext_resource path="res://scenery/LaserBullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons/LaserBullet.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 0.015
@@ -20,6 +20,7 @@ extents = Vector3( 0.0150653, 0.0144125, 0.104236 )
 extents = Vector3( 0.0152551, 0.0517924, 0.0199683 )
 
 [node name="Gun" type="RigidBody"]
+collision_mask = 17
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 4 )
 

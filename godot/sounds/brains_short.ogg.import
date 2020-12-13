@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/brains_short.ogg-86f8f43c1e89a9f3c078f77354fcab9e.oggstr"
+
+[deps]
+
+source_file="res://sounds/brains_short.ogg"
+dest_files=[ "res://.import/brains_short.ogg-86f8f43c1e89a9f3c078f77354fcab9e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

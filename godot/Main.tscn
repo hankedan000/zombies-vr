@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=2]
@@ -13,7 +13,8 @@
 [ext_resource path="res://scenes/DebugUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenery/Desk.tscn" type="PackedScene" id=12]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVRController/Feature_RigidBodyGrab.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenery/Gun.tscn" type="PackedScene" id=14]
+[ext_resource path="res://weapons/Gun.tscn" type="PackedScene" id=14]
+[ext_resource path="res://enemies/BasicZombie.tscn" type="PackedScene" id=15]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 10, 0.01, 10 )
@@ -40,6 +41,7 @@ autoplay = true
 
 [node name="DebugUI_Canvas" parent="ARVROrigin/ARVRCamera" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.624676 )
+editor_live_update = false
 transparent = true
 disable_collision = true
 
@@ -60,6 +62,9 @@ visible = false
 
 [node name="Menu" parent="ARVROrigin/HUD" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.999549, -0.0300326, 0, 0.0300326, 0.999549, 0, -0.0155594, -0.00238425 )
+editor_live_update = false
+transparent = false
+disable_collision = false
 
 [node name="MenuPanel" parent="ARVROrigin/HUD/Menu" instance=ExtResource( 8 )]
 
@@ -70,6 +75,14 @@ transform = Transform( 1, 0, 0, 0, 0.888521, 0.458836, 0, -0.458836, 0.888521, 0
 
 [node name="LeftHandLabel" parent="ARVROrigin/LeftHand" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0.707107, -0.707107, -3.09086e-08, -0.707107, -0.707107, 3.09086e-08, -0.0602737, 0, 0 )
+margin = 16
+billboard = false
+depth_test = true
+resize_mode = 0
+font_size_multiplier = 1.0
+font_color = Color( 1, 1, 1, 1 )
+background_color = Color( 0, 0, 0, 1 )
+transparent = false
 
 [node name="Feature_RigidBodyGrab" parent="ARVROrigin/LeftHand" instance=ExtResource( 13 )]
 grab_type = 0
@@ -86,6 +99,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118918, 0.850452, -0.921429 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727929, -0.835875 )
 
 [node name="Floor" type="StaticBody" parent="."]
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
 mesh = SubResource( 1 )
@@ -100,6 +114,9 @@ transform = Transform( -2.71805e-08, -0.621818, -0.783162, 1, -4.37114e-08, 0, -
 
 [node name="Gun2" parent="." instance=ExtResource( 14 )]
 transform = Transform( 1.24091e-07, 0.838861, 0.544346, -1, 1.17047e-07, 4.75883e-08, -2.37941e-08, -0.544346, 0.838861, -0.112077, 0.762492, -0.638555 )
+
+[node name="BasicZombie" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 4.55562, 0, -4.31421 )
 [connection signal="keyboard_request" from="ARVROrigin/HUD/Menu/MenuPanel" to="." method="_on_MenuPanel_keyboard_request"]
 [connection signal="text_input_cancel" from="ARVROrigin/HUD/Keyboard" to="." method="_on_Keyboard_text_input_cancel"]
 [connection signal="button_pressed" from="ARVROrigin/LeftHand" to="." method="_on_LeftHand_button_pressed"]

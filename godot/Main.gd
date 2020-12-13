@@ -15,7 +15,10 @@ const ROTATE_SPEED = 2 * PI / 4.0
 
 func _ready():
 	vr.initialize()
-		
+	
+	# add player
+	TheWorld.add_player($ARVROrigin)
+	
 	l_hand_label.set_label_text("We're Ready!")
 	
 func _physics_process(dt):
