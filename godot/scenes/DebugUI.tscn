@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/DebugUI.gd" type="Script" id=1]
+
+[node name="DebugUI" type="Control"]
+margin_right = 491.0
+margin_bottom = 328.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftJoystick" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="X" type="Label" parent="LeftJoystick"]
+margin_left = 8.57376
+margin_top = 9.43112
+margin_right = 106.574
+margin_bottom = 27.4311
+text = "Left_X: 0.000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Y" type="Label" parent="LeftJoystick"]
+margin_left = 10.2885
+margin_top = 32.5802
+margin_right = 108.288
+margin_bottom = 50.5802
+text = "Left_Y: 0.000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightJoystick" type="Control" parent="."]
+margin_left = 352.453
+margin_top = -1.85307
+margin_right = 392.453
+margin_bottom = 38.1469
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="X" type="Label" parent="RightJoystick"]
+margin_left = 8.57376
+margin_top = 9.43112
+margin_right = 106.574
+margin_bottom = 27.4311
+text = "Right_X: 0.000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Y" type="Label" parent="RightJoystick"]
+margin_left = 10.2885
+margin_top = 32.5802
+margin_right = 108.288
+margin_bottom = 50.5802
+text = "Right_Y: 0.000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}

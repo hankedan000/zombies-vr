@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Menu.gd" type="Script" id=1]
+
+[node name="Menu" type="MarginContainer"]
+margin_right = 687.0
+margin_bottom = 396.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 687.0
+margin_bottom = 396.0
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 677.0
+margin_bottom = 386.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Margin/VBox"]
+margin_top = -1.0
+margin_right = 667.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 0, 50 )
+text = "My Really Cool Game"
+align = 1
+valign = 1
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Margin/VBox"]
+margin_top = 54.0
+margin_right = 667.0
+margin_bottom = 322.0
+size_flags_vertical = 3
+
+[node name="MSAA" type="HBoxContainer" parent="Panel/Margin/VBox/Buttons"]
+margin_right = 667.0
+margin_bottom = 50.0
+
+[node name="MSAA_Label" type="Label" parent="Panel/Margin/VBox/Buttons/MSAA"]
+margin_top = -1.0
+margin_right = 41.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 0, 50 )
+text = "MSAA:"
+valign = 1
+
+[node name="MSAA_Value" type="LineEdit" parent="Panel/Margin/VBox/Buttons/MSAA"]
+margin_left = 45.0
+margin_right = 145.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+text = "x16"
+
+[node name="MSAA_Slider" type="HSlider" parent="Panel/Margin/VBox/Buttons/MSAA"]
+margin_left = 149.0
+margin_right = 667.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 6.0
+
+[node name="Button" type="Button" parent="Panel/Margin/VBox/Buttons"]
+margin_top = 54.0
+margin_right = 667.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 50 )
+text = "Button1"
+
+[node name="BottomButtons" type="HBoxContainer" parent="Panel/Margin/VBox"]
+margin_top = 326.0
+margin_right = 667.0
+margin_bottom = 376.0
+
+[node name="Keyboard" type="Button" parent="Panel/Margin/VBox/BottomButtons"]
+margin_right = 331.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+text = "Keyboard"
+
+[node name="Start" type="Button" parent="Panel/Margin/VBox/BottomButtons"]
+margin_left = 335.0
+margin_right = 667.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+text = "Start"
+[connection signal="value_changed" from="Panel/Margin/VBox/Buttons/MSAA/MSAA_Slider" to="." method="_on_MSAA_Slider_value_changed"]
+[connection signal="pressed" from="Panel/Margin/VBox/BottomButtons/Keyboard" to="." method="_on_Keyboard_pressed"]

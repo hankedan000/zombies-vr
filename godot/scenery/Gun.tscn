@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenery/Gun.gd" type="Script" id=1]
+[ext_resource path="res://materials/GunMetal.tres" type="Material" id=2]
+[ext_resource path="res://sounds/laser_gun.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenery/LaserBullet.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CylinderMesh" id=1]
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.2
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.03, 0.1, 0.04 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.0150653, 0.0144125, 0.104236 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.0152551, 0.0517924, 0.0199683 )
+
+[node name="Gun" type="RigidBody"]
+script = ExtResource( 1 )
+bullet_scene = ExtResource( 4 )
+
+[node name="Barrel" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0783691 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="Grip" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984522, 0.175264, 0, -0.175264, 0.984522, 0, -0.0478516, 0.00170898 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="BarrelCollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0749397 )
+shape = SubResource( 3 )
+
+[node name="GripCollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984896, 0.17315, 0, -0.17315, 0.984896, 0, -0.0431899, 0.0005683 )
+shape = SubResource( 4 )
+
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="BulletSpawn" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0927124 )
