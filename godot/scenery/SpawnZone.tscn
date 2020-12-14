@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://SpawnZone.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+params_blend_mode = 1
+albedo_color = Color( 0.00784314, 0.776471, 0.980392, 1 )
+
+[sub_resource type="CylinderMesh" id=2]
+material = SubResource( 1 )
+top_radius = 10.0
+bottom_radius = 10.0
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+params_blend_mode = 1
+albedo_color = Color( 0.980392, 0.00784314, 0.00784314, 1 )
+
+[sub_resource type="CylinderMesh" id=4]
+material = SubResource( 3 )
+top_radius = 6.0
+bottom_radius = 6.0
+height = 1.0
+
+[node name="SpawnZone" type="Position3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554551, 0 )
+script = ExtResource( 1 )
+dead_zone_radius = 2
+
+[node name="SpawnZone" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="DeadZone" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+material/0 = null
