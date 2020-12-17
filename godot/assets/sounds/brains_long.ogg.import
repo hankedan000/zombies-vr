@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/brains_long.ogg-0657ac0cabbce97b8bcb0ffe1a0317e1.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/brains_long.ogg"
+dest_files=[ "res://.import/brains_long.ogg-0657ac0cabbce97b8bcb0ffe1a0317e1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

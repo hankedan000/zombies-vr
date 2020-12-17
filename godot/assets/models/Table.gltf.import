@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Table.gltf-283494b17802c09a6f469b268d397235.scn"
+path="res://.import/Table.gltf-ad700a64113e06622b337f55162140f7.scn"
 
 [deps]
 
-source_file="res://models/Table.gltf"
-dest_files=[ "res://.import/Table.gltf-283494b17802c09a6f469b268d397235.scn" ]
+source_file="res://assets/models/Table.gltf"
+dest_files=[ "res://.import/Table.gltf-ad700a64113e06622b337f55162140f7.scn" ]
 
 [params]
 

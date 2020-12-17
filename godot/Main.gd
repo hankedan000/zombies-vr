@@ -1,6 +1,6 @@
 extends Spatial
 
-var BasicZombies = preload("res://enemies/BasicZombie.tscn")
+var BasicZombies = preload("res://scenes/enemies/BasicZombie.tscn")
 
 onready var l_controller = $OQ_ARVROrigin/LeftHand
 onready var r_controller = $OQ_ARVROrigin/RightHand

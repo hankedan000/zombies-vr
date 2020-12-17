@@ -32,7 +32,7 @@ run/main_scene="res://Main.tscn"
 [autoload]
 
 vr="*res://OQ_Toolkit/vr_autoload.gd"
-TheWorld="*res://TheWorld.gd"
+TheWorld="*res://scripts/TheWorld.gd"
 
 [gdnative]
 
