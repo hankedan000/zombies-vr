@@ -35,9 +35,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Panel/Margin/VBox"]
-margin_top = -1.0
 margin_right = 667.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 text = "My Really Cool Game"
 align = 1
@@ -54,9 +53,8 @@ margin_right = 667.0
 margin_bottom = 50.0
 
 [node name="MSAA_Label" type="Label" parent="Panel/Margin/VBox/Buttons/MSAA"]
-margin_top = -1.0
 margin_right = 41.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 text = "MSAA:"
 valign = 1

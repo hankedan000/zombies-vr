@@ -7,6 +7,7 @@ onready var r_controller = $OQ_ARVROrigin/RightHand
 onready var l_hand_label = $OQ_ARVROrigin/LeftHand/LeftHandLabel
 onready var keyboard = $Keyboard
 onready var hud = $OQ_ARVROrigin/HUD
+onready var menu = $OQ_ARVROrigin/HUD/Menu
 onready var zombie_spawn_zone = $Scenery/SpawnZone
 onready var zombie_spawn_timer = $Timers/ZombieSpawnTimer
 onready var zombies = $Zombies
@@ -52,18 +53,6 @@ func _on_Keyboard_text_input_cancel():
 func _on_MenuPanel_keyboard_request():
 	keyboard.show()
 
-func _on_LeftHand_button_pressed(button):
-	if button == vr.CONTROLLER_BUTTON.ENTER:
-		# menu button on left controller
-		# recenter HUD where player is looking
-		hud.global_transform = $OQ_ARVROrigin/ARVRCamera/HUD_Spawn.global_transform
-	
-		# toggle visibility
-		if hud.visible:
-			hud.hide()
-		else:
-			hud.show()
-
 func _on_ZombieSpawnTimer_timeout():
 	var spawn_point = zombie_spawn_zone.get_spawn_point()
 	spawn_point.y = 0.0# always put zombies on the ground
@@ -75,3 +64,12 @@ func _on_ZombieSpawnTimer_timeout():
 	var MIN_WAIT_TIME = 2.0
 	var wait_time = max(MIN_WAIT_TIME,zombie_spawn_timer.wait_time * 0.9)
 	zombie_spawn_timer.start(wait_time)
+
+func _on_GameStateController_paused_changed(paused):
+	# recenter HUD where player is looking
+	hud.global_transform = $OQ_ARVROrigin/OQ_ARVRCamera/HUD_Spawn.global_transform
+	
+	if paused:
+		menu.show()
+	else:
+		menu.hide()

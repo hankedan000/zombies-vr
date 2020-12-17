@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://OQ_Toolkit/OQ_ARVROrigin.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenery/SpawnZone.tscn" type="PackedScene" id=16]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVRCamera.tscn" type="PackedScene" id=17]
+[ext_resource path="res://GameStateController.gd" type="Script" id=18]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 10, 0.01, 10 )
@@ -31,6 +32,7 @@ extents = Vector3( 4.93244, 1, 4.98798 )
 script = ExtResource( 1 )
 
 [node name="OQ_ARVROrigin" parent="." instance=ExtResource( 15 )]
+pause_mode = 2
 
 [node name="OQ_ARVRCamera" parent="OQ_ARVROrigin" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -60,15 +62,16 @@ hide_model_on_grab = true
 
 [node name="HUD" type="Spatial" parent="OQ_ARVROrigin"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
-visible = false
 
 [node name="Menu" parent="OQ_ARVROrigin/HUD" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.999549, -0.0300326, 0, 0.0300326, 0.999549, 0, -0.0155594, -0.00238425 )
+visible = false
 
 [node name="MenuPanel" parent="OQ_ARVROrigin/HUD/Menu" instance=ExtResource( 8 )]
 
 [node name="Keyboard" parent="OQ_ARVROrigin/HUD" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 0.888521, 0.458836, 0, -0.458836, 0.888521, 0, -0.412371, 0.10275 )
+visible = false
 
 [node name="LeftHand" parent="OQ_ARVROrigin" instance=ExtResource( 2 )]
 
@@ -131,7 +134,12 @@ transform = Transform( 1.24091e-07, 0.838861, 0.544346, -1, 1.17047e-07, 4.75883
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="GameStateController" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 18 )
 [connection signal="keyboard_request" from="OQ_ARVROrigin/HUD/Menu/MenuPanel" to="." method="_on_MenuPanel_keyboard_request"]
 [connection signal="text_input_cancel" from="OQ_ARVROrigin/HUD/Keyboard" to="." method="_on_Keyboard_text_input_cancel"]
 [connection signal="button_pressed" from="OQ_ARVROrigin/LeftHand" to="." method="_on_LeftHand_button_pressed"]
 [connection signal="timeout" from="Timers/ZombieSpawnTimer" to="." method="_on_ZombieSpawnTimer_timeout"]
+[connection signal="paused_changed" from="GameStateController" to="." method="_on_GameStateController_paused_changed"]
