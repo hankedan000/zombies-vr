@@ -45,6 +45,7 @@ singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 3d_physics/layer_3="player"
 3d_physics/layer_4="bullets"
 3d_physics/layer_5="scenery"
+3d_physics/layer_6="weapons"
 
 [rendering]
 

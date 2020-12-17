@@ -22,6 +22,7 @@ extents = Vector3( 0.0150653, 0.0144125, 0.104236 )
 extents = Vector3( 0.0152551, 0.0517924, 0.0199683 )
 
 [node name="Gun" type="RigidBody"]
+collision_layer = 32
 collision_mask = 17
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 4 )
