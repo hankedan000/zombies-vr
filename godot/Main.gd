@@ -35,10 +35,16 @@ func _physics_process(dt):
 	
 	# translate player based on walking vector
 	var walk_dist = SLOW_WALK_SPEED * (walk_fb + walk_lr) * dt
+	var camera_quat = Quat(vr.vrCamera.transform.basis)
+	walk_dist = camera_quat.xform(walk_dist)
+	# TODO: figure out how to project walk vector into horizontal plane.
+	# this approach of zeroing out the y-component removes velocity
+	# magnitude, so the player will walk slower when looking up or down.
+	walk_dist.y = 0
 	vr.vrOrigin.translate(walk_dist)
 	
-	var rotate_angle = ROTATE_SPEED * r_controller.get_joystick_axis(0) * dt
-	vr.vrOrigin.rotate(Vector3(0,-1,0),rotate_angle)
+	var rotate_angle = ROTATE_SPEED * -r_controller.get_joystick_axis(0) * dt
+	vr.vrOrigin.rotate(Vector3.UP,rotate_angle)
 	
 func _on_Keyboard_text_input_cancel():
 	keyboard.hide()
