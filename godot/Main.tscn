@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=2]
@@ -14,7 +14,9 @@
 [ext_resource path="res://scenery/Desk.tscn" type="PackedScene" id=12]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVRController/Feature_RigidBodyGrab.tscn" type="PackedScene" id=13]
 [ext_resource path="res://weapons/Gun.tscn" type="PackedScene" id=14]
+[ext_resource path="res://OQ_Toolkit/OQ_ARVROrigin.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenery/SpawnZone.tscn" type="PackedScene" id=16]
+[ext_resource path="res://OQ_Toolkit/OQ_ARVRCamera.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 10, 0.01, 10 )
@@ -28,52 +30,49 @@ extents = Vector3( 4.93244, 1, 4.98798 )
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="ARVROrigin" type="ARVROrigin" parent="."]
+[node name="OQ_ARVROrigin" parent="." instance=ExtResource( 15 )]
 
-[node name="ARVRCamera" type="ARVRCamera" parent="ARVROrigin"]
+[node name="OQ_ARVRCamera" parent="OQ_ARVROrigin" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="HUD_Spawn" type="Spatial" parent="ARVROrigin/ARVRCamera"]
+[node name="HUD_Spawn" type="Spatial" parent="OQ_ARVROrigin/OQ_ARVRCamera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
 
-[node name="AmbientAudio" type="AudioStreamPlayer3D" parent="ARVROrigin/ARVRCamera"]
+[node name="AmbientAudio" type="AudioStreamPlayer3D" parent="OQ_ARVROrigin/OQ_ARVRCamera"]
 stream = ExtResource( 9 )
 autoplay = true
 
-[node name="DebugUI_Canvas" parent="ARVROrigin/ARVRCamera" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.624676 )
-editor_live_update = false
+[node name="DebugUI_Canvas" parent="OQ_ARVROrigin/OQ_ARVRCamera" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.625 )
 transparent = true
 disable_collision = true
 
-[node name="DebugUI" parent="ARVROrigin/ARVRCamera/DebugUI_Canvas" instance=ExtResource( 11 )]
+[node name="DebugUI" parent="OQ_ARVROrigin/OQ_ARVRCamera/DebugUI_Canvas" instance=ExtResource( 11 )]
 
-[node name="RightHand" parent="ARVROrigin" instance=ExtResource( 3 )]
+[node name="RightHand" parent="OQ_ARVROrigin" instance=ExtResource( 3 )]
 
-[node name="Feature_UIRayCast" parent="ARVROrigin/RightHand" instance=ExtResource( 4 )]
+[node name="Feature_UIRayCast" parent="OQ_ARVROrigin/RightHand" instance=ExtResource( 4 )]
 
-[node name="Feature_RigidBodyGrab" parent="ARVROrigin/RightHand" instance=ExtResource( 13 )]
+[node name="Feature_RigidBodyGrab" parent="OQ_ARVROrigin/RightHand" instance=ExtResource( 13 )]
 grab_type = 0
 collision_body_active = true
 hide_model_on_grab = true
 
-[node name="HUD" type="Spatial" parent="ARVROrigin"]
+[node name="HUD" type="Spatial" parent="OQ_ARVROrigin"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
 visible = false
 
-[node name="Menu" parent="ARVROrigin/HUD" instance=ExtResource( 7 )]
+[node name="Menu" parent="OQ_ARVROrigin/HUD" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.999549, -0.0300326, 0, 0.0300326, 0.999549, 0, -0.0155594, -0.00238425 )
-editor_live_update = false
-transparent = false
-disable_collision = false
 
-[node name="MenuPanel" parent="ARVROrigin/HUD/Menu" instance=ExtResource( 8 )]
+[node name="MenuPanel" parent="OQ_ARVROrigin/HUD/Menu" instance=ExtResource( 8 )]
 
-[node name="Keyboard" parent="ARVROrigin/HUD" instance=ExtResource( 5 )]
+[node name="Keyboard" parent="OQ_ARVROrigin/HUD" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 0.888521, 0.458836, 0, -0.458836, 0.888521, 0, -0.412371, 0.10275 )
 
-[node name="LeftHand" parent="ARVROrigin" instance=ExtResource( 2 )]
+[node name="LeftHand" parent="OQ_ARVROrigin" instance=ExtResource( 2 )]
 
-[node name="LeftHandLabel" parent="ARVROrigin/LeftHand" instance=ExtResource( 6 )]
+[node name="LeftHandLabel" parent="OQ_ARVROrigin/LeftHand" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0.707107, -0.707107, -3.09086e-08, -0.707107, -0.707107, 3.09086e-08, -0.0602737, 0, 0 )
 margin = 16
 billboard = false
@@ -84,7 +83,7 @@ font_color = Color( 1, 1, 1, 1 )
 background_color = Color( 0, 0, 0, 1 )
 transparent = false
 
-[node name="Feature_RigidBodyGrab" parent="ARVROrigin/LeftHand" instance=ExtResource( 13 )]
+[node name="Feature_RigidBodyGrab" parent="OQ_ARVROrigin/LeftHand" instance=ExtResource( 13 )]
 grab_type = 0
 collision_body_active = true
 hide_model_on_grab = true
@@ -132,7 +131,7 @@ transform = Transform( 1.24091e-07, 0.838861, 0.544346, -1, 1.17047e-07, 4.75883
 wait_time = 10.0
 one_shot = true
 autostart = true
-[connection signal="keyboard_request" from="ARVROrigin/HUD/Menu/MenuPanel" to="." method="_on_MenuPanel_keyboard_request"]
-[connection signal="text_input_cancel" from="ARVROrigin/HUD/Keyboard" to="." method="_on_Keyboard_text_input_cancel"]
-[connection signal="button_pressed" from="ARVROrigin/LeftHand" to="." method="_on_LeftHand_button_pressed"]
+[connection signal="keyboard_request" from="OQ_ARVROrigin/HUD/Menu/MenuPanel" to="." method="_on_MenuPanel_keyboard_request"]
+[connection signal="text_input_cancel" from="OQ_ARVROrigin/HUD/Keyboard" to="." method="_on_Keyboard_text_input_cancel"]
+[connection signal="button_pressed" from="OQ_ARVROrigin/LeftHand" to="." method="_on_LeftHand_button_pressed"]
 [connection signal="timeout" from="Timers/ZombieSpawnTimer" to="." method="_on_ZombieSpawnTimer_timeout"]

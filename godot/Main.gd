@@ -2,12 +2,11 @@ extends Spatial
 
 var BasicZombies = preload("res://enemies/BasicZombie.tscn")
 
-onready var l_controller = $ARVROrigin/LeftHand
-onready var r_controller = $ARVROrigin/RightHand
-onready var l_hand_label = $ARVROrigin/LeftHand/LeftHandLabel
+onready var l_controller = $OQ_ARVROrigin/LeftHand
+onready var r_controller = $OQ_ARVROrigin/RightHand
+onready var l_hand_label = $OQ_ARVROrigin/LeftHand/LeftHandLabel
 onready var keyboard = $Keyboard
-onready var hud = $ARVROrigin/HUD
-onready var origin = $ARVROrigin
+onready var hud = $OQ_ARVROrigin/HUD
 onready var zombie_spawn_zone = $Scenery/SpawnZone
 onready var zombie_spawn_timer = $Timers/ZombieSpawnTimer
 onready var zombies = $Zombies
@@ -22,7 +21,7 @@ func _ready():
 	vr.initialize()
 	
 	# add player
-	TheWorld.add_player($ARVROrigin)
+	TheWorld.add_player($OQ_ARVROrigin)
 	
 	l_hand_label.set_label_text("We're Ready!")
 	
@@ -36,10 +35,10 @@ func _physics_process(dt):
 	
 	# translate player based on walking vector
 	var walk_dist = SLOW_WALK_SPEED * (walk_fb + walk_lr) * dt
-	origin.translate(walk_dist)
+	vr.vrOrigin.translate(walk_dist)
 	
 	var rotate_angle = ROTATE_SPEED * r_controller.get_joystick_axis(0) * dt
-	origin.rotate(Vector3(0,-1,0),rotate_angle)
+	vr.vrOrigin.rotate(Vector3(0,-1,0),rotate_angle)
 	
 func _on_Keyboard_text_input_cancel():
 	keyboard.hide()
@@ -51,7 +50,7 @@ func _on_LeftHand_button_pressed(button):
 	if button == vr.CONTROLLER_BUTTON.ENTER:
 		# menu button on left controller
 		# recenter HUD where player is looking
-		hud.global_transform = $ARVROrigin/ARVRCamera/HUD_Spawn.global_transform
+		hud.global_transform = $OQ_ARVROrigin/ARVRCamera/HUD_Spawn.global_transform
 	
 		# toggle visibility
 		if hud.visible:
