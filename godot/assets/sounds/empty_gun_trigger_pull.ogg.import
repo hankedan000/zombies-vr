@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/empty_gun_trigger_pull.ogg-fa1f00c609be36bd52f159c70def4800.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/empty_gun_trigger_pull.ogg"
+dest_files=[ "res://.import/empty_gun_trigger_pull.ogg-fa1f00c609be36bd52f159c70def4800.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

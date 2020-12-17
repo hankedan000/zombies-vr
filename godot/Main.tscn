@@ -77,14 +77,6 @@ visible = false
 
 [node name="LeftHandLabel" parent="OQ_ARVROrigin/LeftHand" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, -1, 0.707107, -0.707107, -3.09086e-08, -0.707107, -0.707107, 3.09086e-08, -0.0602737, 0, 0 )
-margin = 16
-billboard = false
-depth_test = true
-resize_mode = 0
-font_size_multiplier = 1.0
-font_color = Color( 1, 1, 1, 1 )
-background_color = Color( 0, 0, 0, 1 )
-transparent = false
 
 [node name="Feature_RigidBodyGrab" parent="OQ_ARVROrigin/LeftHand" instance=ExtResource( 13 )]
 grab_type = 0

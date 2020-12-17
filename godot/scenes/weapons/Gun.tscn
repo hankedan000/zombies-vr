@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/weapons/Gun.gd" type="Script" id=1]
 [ext_resource path="res://assets/materials/GunMetal.tres" type="Material" id=2]
 [ext_resource path="res://assets/sounds/laser_gun.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/weapons/LaserBullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sounds/empty_gun_trigger_pull.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 0.015
@@ -45,5 +47,26 @@ shape = SubResource( 4 )
 [node name="ShootSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 3 )
 
+[node name="EmptyGunSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 6 )
+
 [node name="BulletSpawn" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0927124 )
+
+[node name="AmmoLabelLeft" parent="." instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0.182716, 0.983166, -7.98677e-09, 0.983166, -0.182716, -4.29755e-08, -0.0200348, -0.0474641, 0.0018619 )
+text = "12"
+font_size_multiplier = 0.5
+background_color = Color( 0, 0, 0, 0 )
+transparent = true
+
+[node name="AmmoLabelRight" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1.04308e-07, -1.49012e-08, 1, -0.201061, 0.979579, 3.75029e-08, -0.979579, -0.201061, 1.13438e-07, 0.0172722, -0.0474641, 0.0018619 )
+text = "12"
+font_size_multiplier = 0.5
+background_color = Color( 0, 0, 0, 0 )
+transparent = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
