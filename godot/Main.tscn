@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://OQ_Toolkit/OQ_RightController.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVRController/Feature_UIRayCast.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DKeyboard.tscn" type="PackedScene" id=5]
-[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DLabel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/Menu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sounds/wildlife.ogg" type="AudioStream" id=9]
@@ -74,9 +73,6 @@ transform = Transform( 1, 0, 0, 0, 0.888521, 0.458836, 0, -0.458836, 0.888521, 0
 visible = false
 
 [node name="LeftHand" parent="OQ_ARVROrigin" instance=ExtResource( 2 )]
-
-[node name="LeftHandLabel" parent="OQ_ARVROrigin/LeftHand" instance=ExtResource( 6 )]
-transform = Transform( -4.37114e-08, 0, -1, 0.707107, -0.707107, -3.09086e-08, -0.707107, -0.707107, 3.09086e-08, -0.0602737, 0, 0 )
 
 [node name="Feature_RigidBodyGrab" parent="OQ_ARVROrigin/LeftHand" instance=ExtResource( 13 )]
 grab_type = 0

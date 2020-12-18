@@ -4,7 +4,6 @@ var BasicZombies = preload("res://scenes/enemies/BasicZombie.tscn")
 
 onready var l_controller = $OQ_ARVROrigin/LeftHand
 onready var r_controller = $OQ_ARVROrigin/RightHand
-onready var l_hand_label = $OQ_ARVROrigin/LeftHand/LeftHandLabel
 onready var keyboard = $Keyboard
 onready var hud = $OQ_ARVROrigin/HUD
 onready var menu = $OQ_ARVROrigin/HUD/Menu
@@ -23,8 +22,6 @@ func _ready():
 	
 	# add player
 	TheWorld.add_player($OQ_ARVROrigin)
-	
-	l_hand_label.set_label_text("We're Ready!")
 	
 func _physics_process(dt):
 	# forward/back walk strength (forward is positive)
