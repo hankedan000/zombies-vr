@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "OQClass_GrabbableRigidBody",
 "language": "GDScript",
 "path": "res://OQ_Toolkit/OQ_Classes/OQClass_GrabbableRigidBody.gd"
+}, {
+"base": "KinematicBody",
+"class": "Zombie",
+"language": "GDScript",
+"path": "res://scenes/enemies/Zombie.gd"
 } ]
 _global_script_class_icons={
 "Feature_RigidBodyGrab": "",
 "HealthBar": "",
-"OQClass_GrabbableRigidBody": ""
+"OQClass_GrabbableRigidBody": "",
+"Zombie": ""
 }
 
 [application]

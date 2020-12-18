@@ -26,4 +26,5 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 3 )
+[connection signal="area_entered" from="." to="." method="_on_LaserBullet_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_LaserBullet_body_entered"]

@@ -1,4 +1,5 @@
-extends RigidBody
+extends KinematicBody
+class_name Zombie
 
 signal on_dead()
 
@@ -17,7 +18,6 @@ func _ready():
 	for child in get_children():
 		if child is HealthBar:
 			_health_bar = child
-			print("ITS A HEALTH BAR!")
 			break
 	
 	spawn_sound.stream = spawn_sound_stream
@@ -49,7 +49,7 @@ func die():
 	emit_signal("on_dead")
 	queue_free()
 
-func hurt(damage):
+func _on_Hitbox_hit(damage):
 	curr_health -= damage
 	_update_health()
 	

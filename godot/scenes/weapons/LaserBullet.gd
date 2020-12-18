@@ -15,8 +15,14 @@ func _physics_process(dt):
 	if lifetime > ttl:
 		queue_free()
 
-func _on_LaserBullet_body_entered(body):
-	if body.has_method("hurt"):
-		body.hurt(damage)
+func _on_collision(node):
+	if node.has_method("hit"):
+		node.hit(damage)
 		
 	queue_free()
+
+func _on_LaserBullet_body_entered(body):
+	_on_collision(body)
+
+func _on_LaserBullet_area_entered(area):
+	_on_collision(area)
