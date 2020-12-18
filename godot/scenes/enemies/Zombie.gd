@@ -37,7 +37,7 @@ var _target : Spatial = null
 # a smoothed turning motion
 var _look_at_pos = null
 # a reference to the zombies health bar node
-var _health_bar : HealthBar = null
+var _health_bar : FloatingHealthBar = null
 # the zombies computed walking path
 var _path = []
 # which path index in above path we are currently at
@@ -48,8 +48,9 @@ var curr_health = 0
 func _ready():
 	# find health bar in children
 	for child in get_children():
-		if child is HealthBar:
+		if child is FloatingHealthBar:
 			_health_bar = child
+			_health_bar.ui_control.set_max_health(max_health)
 			break
 	
 	spawn_sound.stream = spawn_sound_stream
@@ -139,7 +140,7 @@ func think():
 
 func _update_health():
 	if _health_bar:
-		_health_bar.update_health(curr_health,max_health)
+		_health_bar.ui_control.update_health(curr_health)
 
 func die():
 	emit_signal("on_dead")

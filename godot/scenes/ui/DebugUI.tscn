@@ -2,10 +2,9 @@
 
 [ext_resource path="res://scenes/ui/DebugUI.gd" type="Script" id=1]
 
-
 [node name="DebugUI" type="Control"]
-margin_right = 491.0
-margin_bottom = 328.0
+margin_right = 490.0
+margin_bottom = 330.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

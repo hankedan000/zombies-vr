@@ -1,20 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/HealthBar/HealthBar.gd" type="Script" id=2]
 
-[node name="HealthBar" type="Spatial"]
-script = ExtResource( 2 )
-
-[node name="Canvas" parent="." instance=ExtResource( 1 )]
-transparent = true
-disable_collision = true
-
-[node name="ProgressBar" type="ProgressBar" parent="Canvas"]
+[node name="HealthBar" type="ProgressBar"]
 margin_right = 694.0
 margin_bottom = 60.0
 value = 75.0
 percent_visible = false
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="."]

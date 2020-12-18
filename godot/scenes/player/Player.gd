@@ -6,12 +6,22 @@ const SLOW_WALK_SPEED = 1.0
 # rotations per second
 const ROTATE_SPEED = 2 * PI / 4.0
 
+# maximum player health
+export var max_health = 10
+
 onready var l_controller = $LeftHand
 onready var r_controller = $RightHand
 onready var left_raycast = $LeftHand/Feature_UIRayCast
 onready var right_raycast = $RightHand/Feature_UIRayCast
 onready var menu_spawn = $Camera/MenuSpawn
 onready var menu_root = $MenuRoot
+
+var _health = 0
+
+func _ready():
+	_health = max_health
+	hud_ui().health_bar.set_max_health(max_health)
+	hud_ui().health_bar.set_health(_health)
 
 func _physics_process(dt):
 	if TheWorld.paused():
@@ -37,7 +47,16 @@ func _physics_process(dt):
 	
 	var rotate_angle = ROTATE_SPEED * -r_controller.get_joystick_axis(0) * dt
 	vr.vrOrigin.rotate(Vector3.UP,rotate_angle)
-
+	
+func hud_ui() -> HUD_UI:
+	var hud_ui = $Camera/HUD_Canvas.ui_control
+	return hud_ui
+	
+func hurt(damage):
+	_health -= damage
+	_health = max(0,_health)
+	hud_ui().health_bar.update_health(_health)
+	
 func _on_GameStateController_paused_changed(paused):
 	# recenter HUD where player is looking
 	menu_root.global_transform = menu_spawn.global_transform

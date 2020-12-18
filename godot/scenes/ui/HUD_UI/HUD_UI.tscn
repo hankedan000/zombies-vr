@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ui/HUD_UI/HUD_UI.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/HealthBar/HealthBar.tscn" type="PackedScene" id=2]
+
+[node name="HUD_UI" type="Control"]
+margin_right = 490.0
+margin_bottom = 330.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" parent="." instance=ExtResource( 2 )]
+margin_left = 35.0
+margin_top = 7.0
+margin_right = 456.0
+margin_bottom = 29.0

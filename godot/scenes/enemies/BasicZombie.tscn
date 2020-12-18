@@ -3,9 +3,9 @@
 [ext_resource path="res://assets/sounds/brains_long.ogg" type="AudioStream" id=1]
 [ext_resource path="res://assets/materials/BasicZombieGreen.tres" type="Material" id=2]
 [ext_resource path="res://scenes/enemies/Zombie.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/ui/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/misc/Hitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sounds/chewing1.ogg" type="AudioStream" id=6]
+[ext_resource path="res://scenes/ui/HealthBar/FloatingHealthBar.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.4, 0.15, 1.4 )
@@ -39,8 +39,8 @@ transform = Transform( 1, -1.54569e-09, -3.86607e-08, 3.8454e-08, 0.15026, 0.988
 mesh = SubResource( 2 )
 material/0 = ExtResource( 2 )
 
-[node name="HealthBar" parent="." index="5" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.45984, 0 )
+[node name="HealthBar" parent="." index="5" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.13515e-08, 1.46166, -0.064923 )
 
 [node name="Hitbox" parent="." index="6" instance=ExtResource( 5 )]
 collision_layer = 2

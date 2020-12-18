@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://OQ_Toolkit/OQ_ARVRController/scripts/Feature_RigidBodyGrab.gd"
 }, {
 "base": "Spatial",
+"class": "FloatingHealthBar",
+"language": "GDScript",
+"path": "res://scenes/ui/HealthBar/FloatingHealthBar.gd"
+}, {
+"base": "Control",
+"class": "HUD_UI",
+"language": "GDScript",
+"path": "res://scenes/ui/HUD_UI/HUD_UI.gd"
+}, {
+"base": "ProgressBar",
 "class": "HealthBar",
 "language": "GDScript",
 "path": "res://scenes/ui/HealthBar/HealthBar.gd"
@@ -31,6 +41,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Feature_RigidBodyGrab": "",
+"FloatingHealthBar": "",
+"HUD_UI": "",
 "HealthBar": "",
 "OQClass_GrabbableRigidBody": "",
 "Zombie": ""
