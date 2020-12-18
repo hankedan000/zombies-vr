@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=2]
@@ -26,6 +26,16 @@ albedo_color = Color( 0.529412, 0.4, 0.231373, 1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 4.93244, 1, 4.98798 )
+
+[sub_resource type="NavigationMesh" id=5]
+vertices = PoolVector3Array( -6.6, 0.196681, -14.4, -14.4, 0.196681, -14.4, -14.4, 0.196681, -6.9, 0, 0.196681, -0.3, 1.5, 0.196681, -0.6, 1.5, 0.196681, -14.4, -6.6, 0.196681, -14.4, -14.4, 0.196681, -6.9, -14.4, 0.196681, 0.9, -14.4, 0.196681, 0.9, 0, 0.196681, 0.9, 0, 0.196681, -0.3, 14.4, 0.196681, -6.9, 14.4, 0.196681, -14.4, 7.8, 0.196681, -14.4, 3, 0.196681, -0.6, 3.3, 0.196681, 0.9, 14.4, 0.196681, 0.9, 14.4, 0.196681, -6.9, 1.5, 0.196681, -14.4, 1.5, 0.196681, -0.6, 3, 0.196681, -0.6, 14.4, 0.196681, -6.9, 7.8, 0.196681, -14.4, -14.4, 0.196681, 7.5, -14.4, 0.196681, 14.4, -6.6, 0.196681, 14.4, 1.5, 0.196681, 14.4, 1.5, 0.196681, 2.7, 0, 0.196681, 2.4, -6.6, 0.196681, 14.4, 0, 0.196681, 2.4, 0, 0.196681, 0.9, -14.4, 0.196681, 0.9, -14.4, 0.196681, 7.5, -6.6, 0.196681, 14.4, 7.8, 0.196681, 14.4, 14.4, 0.196681, 14.4, 14.4, 0.196681, 7.5, 14.4, 0.196681, 0.9, 3.3, 0.196681, 0.9, 3, 0.196681, 2.7, 1.5, 0.196681, 14.4, 7.8, 0.196681, 14.4, 14.4, 0.196681, 7.5, 3, 0.196681, 2.7, 1.5, 0.196681, 2.7, 1.5, 0.196681, 14.4 )
+polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 8, 7, 3 ), PoolIntArray( 3, 7, 4 ), PoolIntArray( 4, 7, 6 ), PoolIntArray( 4, 6, 5 ), PoolIntArray( 11, 10, 9 ), PoolIntArray( 14, 13, 12 ), PoolIntArray( 18, 17, 15 ), PoolIntArray( 15, 17, 16 ), PoolIntArray( 23, 22, 19 ), PoolIntArray( 19, 22, 21 ), PoolIntArray( 19, 21, 20 ), PoolIntArray( 26, 25, 24 ), PoolIntArray( 30, 29, 27 ), PoolIntArray( 27, 29, 28 ), PoolIntArray( 35, 34, 31 ), PoolIntArray( 31, 34, 32 ), PoolIntArray( 32, 34, 33 ), PoolIntArray( 38, 37, 36 ), PoolIntArray( 44, 43, 39 ), PoolIntArray( 39, 43, 42 ), PoolIntArray( 39, 42, 41 ), PoolIntArray( 39, 41, 40 ), PoolIntArray( 47, 46, 45 ) ]
+cell/height = 0.1
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 30, 2, 30 )
+
+[sub_resource type="CubeMesh" id=6]
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
@@ -82,23 +92,19 @@ hide_model_on_grab = true
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.681973, -0.462331, 0.566712, 0, 0.774856, 0.632138, -0.731378, -0.431101, 0.528431, 0, 0, 0 )
 
-[node name="Zombies" type="Node" parent="."]
-
 [node name="Scenery" type="Node" parent="."]
 
 [node name="Floor" type="StaticBody" parent="Scenery"]
 collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Scenery/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00644445, -0.010986, 0.00931311 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Scenery/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01395, 0 )
 shape = SubResource( 3 )
-
-[node name="Desk" parent="Scenery" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727929, -0.835875 )
 
 [node name="MusicBox" parent="Scenery" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118918, 0.850452, -0.921429 )
@@ -108,6 +114,9 @@ show_zone_in_editor = false
 spawn_zone_radius = 10
 dead_zone_radius = 6
 height = 1
+
+[node name="Desk" parent="Scenery" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727929, -0.835875 )
 
 [node name="Weapons" type="Node" parent="."]
 
@@ -127,6 +136,24 @@ autostart = true
 [node name="GameStateController" type="Node" parent="."]
 pause_mode = 2
 script = ExtResource( 18 )
+
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 5 )
+
+[node name="FloorMesh" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.00332, 0 )
+visible = false
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Block" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68698, 0, 1.00127 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="Zombies" type="Node" parent="Navigation"]
 [connection signal="keyboard_request" from="OQ_ARVROrigin/HUD/Menu/MenuPanel" to="." method="_on_MenuPanel_keyboard_request"]
 [connection signal="text_input_cancel" from="OQ_ARVROrigin/HUD/Keyboard" to="." method="_on_Keyboard_text_input_cancel"]
 [connection signal="button_pressed" from="OQ_ARVROrigin/LeftHand" to="." method="_on_LeftHand_button_pressed"]

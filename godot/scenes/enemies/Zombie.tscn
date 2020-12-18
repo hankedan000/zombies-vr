@@ -7,3 +7,8 @@ script = ExtResource( 1 )
 
 [node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
 unit_size = 4.0
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

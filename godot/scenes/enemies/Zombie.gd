@@ -3,14 +3,25 @@ class_name Zombie
 
 signal on_dead()
 
+# zombies max health
 export var max_health = 1
+# bombies max walking speed
 export var speed = 0.5# meters/second
+# audio stream that gets played when zombie spawns
 export var spawn_sound_stream : AudioStream = null
 
 onready var spawn_sound = $SpawnSound
 
+# the spatial node that the zombie will walk towards
+# this is set to the first player at ready-time
 var target : Spatial = null
+# a reference to the zombies health bar node
 var _health_bar : HealthBar = null
+# the zombies computed walking path
+var _path = []
+# which path index in above path we are currently at
+var _path_node = 0
+# the zombies current health amount
 var curr_health = 0
 
 func _ready():
@@ -34,13 +45,31 @@ func _physics_process(dt):
 			target = player
 			break
 	
-	# still no target set... quit early
-	if not target:
-		return
-		
-	transform = transform.looking_at(target.transform.origin,Vector3.UP)
-	translate(Vector3(0,0,-1) * speed * dt)
-	
+	if _path_node < _path.size():
+		# compute zombies direction toward next node in path
+		var direction = _path[_path_node] - global_transform.origin
+		if direction.length() < 1:
+			_path_node += 1
+		else:
+			move_and_slide(
+				direction.normalized() * speed,
+				Vector3.UP)
+				
+			# FIXME this is hack to make the zombies stay on the
+			# ground. This should be fixed more properly by adjusting
+			# the offset based on the NavigationMeshinstances's
+			# 'height' property
+			global_transform.origin.y = 0.0
+
+func move_to(target_pos):
+	_path_node = 0
+	if TheWorld.nav:
+		_path = TheWorld.nav.get_simple_path(
+			global_transform.origin,
+			target_pos)
+	else:
+		_path = []
+
 func _update_health():
 	if _health_bar:
 		_health_bar.update_health(curr_health,max_health)
@@ -55,3 +84,9 @@ func _on_Hitbox_hit(damage):
 	
 	if curr_health <= 0:
 		die()
+
+func _on_MoveTimer_timeout():
+	if target:
+		# move zombie toward target's position
+		var target_pos = target.global_transform.origin
+		move_to(target_pos)

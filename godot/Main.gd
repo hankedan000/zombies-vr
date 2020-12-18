@@ -9,7 +9,7 @@ onready var hud = $OQ_ARVROrigin/HUD
 onready var menu = $OQ_ARVROrigin/HUD/Menu
 onready var zombie_spawn_zone = $Scenery/SpawnZone
 onready var zombie_spawn_timer = $Timers/ZombieSpawnTimer
-onready var zombies = $Zombies
+onready var zombies = $Navigation/Zombies
 
 # units per second
 const SLOW_WALK_SPEED = 1.0
@@ -22,6 +22,7 @@ func _ready():
 	
 	# add player
 	TheWorld.add_player($OQ_ARVROrigin)
+	TheWorld.nav = $Navigation
 	
 func _physics_process(dt):
 	# forward/back walk strength (forward is positive)
