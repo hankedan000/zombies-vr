@@ -14,7 +14,15 @@ onready var spawn_sound = $SpawnSound
 
 # the spatial node that the zombie will walk towards
 # this is set to the first player at ready-time
-var target : Spatial = null
+var _target : Spatial = null
+# the target position the zombie is currently looking at.
+# this position will be interpolated to give the zombies
+# a smoothed turning motion
+var _look_at_pos = null
+# a factor used to smooth the zombies turning speed
+#  0 -> never turn
+#  1.0 -> instantaneous turning
+const LOOK_AT_SMOOTH_FACTOR = 0.05
 # a reference to the zombies health bar node
 var _health_bar : HealthBar = null
 # the zombies computed walking path
@@ -38,16 +46,10 @@ func _ready():
 	_update_health()
 
 func _physics_process(dt):
-	# init target to first player in list
-	if not target:
-		for player in TheWorld.players:
-			# TODO check for closest player, when multiplayer is supported
-			target = player
-			break
-	
 	if _path_node < _path.size():
 		# compute zombies direction toward next node in path
-		var direction = _path[_path_node] - global_transform.origin
+		var path_target = _path[_path_node]
+		var direction = path_target - global_transform.origin
 		if direction.length() < 1:
 			_path_node += 1
 		else:
@@ -60,6 +62,18 @@ func _physics_process(dt):
 			# the offset based on the NavigationMeshinstances's
 			# 'height' property
 			global_transform.origin.y = 0.0
+			path_target.y = 0.0
+			
+			if _look_at_pos:
+				# smooth the looking
+				_look_at_pos = lerp(
+					_look_at_pos,
+					path_target,
+					LOOK_AT_SMOOTH_FACTOR)
+			else:
+				_look_at_pos = path_target
+			
+			look_at(_look_at_pos,Vector3.UP)
 
 func move_to(target_pos):
 	_path_node = 0
@@ -69,6 +83,20 @@ func move_to(target_pos):
 			target_pos)
 	else:
 		_path = []
+		
+# call this to have the Zombie recompute it's trajectory
+func think():
+	# init target to first player in list
+	if not _target:
+		for player in TheWorld.players:
+			# TODO check for closest player, when multiplayer is supported
+			_target = player
+			break
+	
+	if _target:
+		# move zombie toward target's position
+		var target_pos = _target.global_transform.origin
+		move_to(target_pos)
 
 func _update_health():
 	if _health_bar:
@@ -85,8 +113,8 @@ func _on_Hitbox_hit(damage):
 	if curr_health <= 0:
 		die()
 
-func _on_MoveTimer_timeout():
-	if target:
-		# move zombie toward target's position
-		var target_pos = target.global_transform.origin
-		move_to(target_pos)
+func _on_ThinkTimer_timeout():
+	think()
+
+func _on_Zombie_tree_entered():
+	think()
