@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sounds/brains_long.ogg" type="AudioStream" id=1]
 [ext_resource path="res://assets/materials/BasicZombieGreen.tres" type="Material" id=2]
 [ext_resource path="res://scenes/enemies/Zombie.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.4, 0.15, 1.4 )
@@ -17,6 +18,7 @@ extents = Vector3( 0.207055, 0.699261, 0.0735722 )
 transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0 )
 collision_layer = 2
 collision_mask = 31
+max_health = 2
 spawn_sound_stream = ExtResource( 1 )
 
 [node name="Body" type="MeshInstance" parent="." index="0"]
@@ -37,3 +39,6 @@ material/0 = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693357, 0 )
 shape = SubResource( 3 )
+
+[node name="HealthBar" parent="." index="5" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.45984, 0 )

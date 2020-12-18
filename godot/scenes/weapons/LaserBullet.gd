@@ -3,7 +3,7 @@ extends Area
 const SPEED = 10# meters/second
 
 export var ttl = 2
-export var damage = 2
+export var damage = 1
 
 var lifetime = 0
 
