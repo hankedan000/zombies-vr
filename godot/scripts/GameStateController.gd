@@ -2,7 +2,6 @@ extends Node
 
 signal paused_changed(paused)
 
-
 func _ready():
 	vr.leftController.connect("button_pressed",self,"_on_LeftHand_button_pressed")
 

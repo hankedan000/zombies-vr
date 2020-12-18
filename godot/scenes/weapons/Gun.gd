@@ -83,6 +83,10 @@ func _shoot():
 		initiate_reload()
 
 func _controller_button_pressed(index):
+	if TheWorld.paused():
+		# don't shoot while game is paused
+		return
+	
 	if index == vr.CONTROLLER_BUTTON.INDEX_TRIGGER:
 		_shoot()
 
