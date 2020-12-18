@@ -67,6 +67,7 @@ func _on_GameStateController_paused_changed(paused):
 	# recenter HUD where player is looking
 	hud.global_transform = $OQ_ARVROrigin/OQ_ARVRCamera/HUD_Spawn.global_transform
 	
+	$OQ_ARVROrigin/RightHand/Feature_UIRayCast.active = paused
 	if paused:
 		menu.show()
 	else:

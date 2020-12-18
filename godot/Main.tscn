@@ -63,6 +63,7 @@ disable_collision = true
 [node name="RightHand" parent="OQ_ARVROrigin" instance=ExtResource( 3 )]
 
 [node name="Feature_UIRayCast" parent="OQ_ARVROrigin/RightHand" instance=ExtResource( 4 )]
+active = false
 
 [node name="Feature_RigidBodyGrab" parent="OQ_ARVROrigin/RightHand" instance=ExtResource( 13 )]
 grab_type = 0
