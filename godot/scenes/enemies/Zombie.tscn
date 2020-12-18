@@ -8,8 +8,13 @@ script = ExtResource( 1 )
 [node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
 unit_size = 4.0
 
+[node name="ChewingSound" type="AudioStreamPlayer3D" parent="."]
+
 [node name="ThinkTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="ChewTimer" type="Timer" parent="."]
 [connection signal="tree_entered" from="." to="." method="_on_Zombie_tree_entered"]
 [connection signal="timeout" from="ThinkTimer" to="." method="_on_ThinkTimer_timeout"]
+[connection signal="timeout" from="ChewTimer" to="." method="_on_ChewTimer_timeout"]

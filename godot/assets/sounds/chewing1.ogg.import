@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/chewing1.ogg-ac5fa6c2120913c08024186deb777754.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/chewing1.ogg"
+dest_files=[ "res://.import/chewing1.ogg-ac5fa6c2120913c08024186deb777754.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

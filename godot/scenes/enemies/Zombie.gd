@@ -3,14 +3,31 @@ class_name Zombie
 
 signal on_dead()
 
+# a factor used to smooth the zombies turning speed
+#  0 -> never turn
+#  1.0 -> instantaneous turning
+const LOOK_AT_SMOOTH_FACTOR = 0.05
+
+# the minimum distance (meters) from the player before
+# the zombie begins to chew
+const CHEW_DISTANCE = 0.5
+
 # zombies max health
 export var max_health = 1
 # bombies max walking speed
 export var speed = 0.5# meters/second
+# duration between chews
+export var chew_interval = 1
+# damage incurred on player by a zombie's chew on
+export var chew_damage = 1
 # audio stream that gets played when zombie spawns
 export var spawn_sound_stream : AudioStream = null
+# audio stream that gets played when zombie chews on player
+export var chewing_sound_stream : AudioStream = null
 
 onready var spawn_sound = $SpawnSound
+onready var chewing_sound = $ChewingSound
+onready var chew_timer = $ChewTimer
 
 # the spatial node that the zombie will walk towards
 # this is set to the first player at ready-time
@@ -19,10 +36,6 @@ var _target : Spatial = null
 # this position will be interpolated to give the zombies
 # a smoothed turning motion
 var _look_at_pos = null
-# a factor used to smooth the zombies turning speed
-#  0 -> never turn
-#  1.0 -> instantaneous turning
-const LOOK_AT_SMOOTH_FACTOR = 0.05
 # a reference to the zombies health bar node
 var _health_bar : HealthBar = null
 # the zombies computed walking path
@@ -41,18 +54,32 @@ func _ready():
 	
 	spawn_sound.stream = spawn_sound_stream
 	spawn_sound.play()
+	chewing_sound.stream = chewing_sound_stream
+	chew_timer.wait_time = chew_interval
 	
 	curr_health = max_health
 	_update_health()
 
 func _physics_process(dt):
+	# handle chewing logic
+	if _target:
+		var target_dist = _target.global_transform.origin - global_transform.origin
+		if target_dist.length() > CHEW_DISTANCE:
+			stop_chewing()
+		elif not chewing() and target_dist.length() <= CHEW_DISTANCE:
+			start_chewing()
+	elif chewing():
+		# no target, don't chew
+		stop_chewing()
+	
 	if _path_node < _path.size():
 		# compute zombies direction toward next node in path
 		var path_target = _path[_path_node]
 		var direction = path_target - global_transform.origin
-		if direction.length() < 1:
+		if direction.length() < 1 and _path_node < (_path.size() - 1):
 			_path_node += 1
-		else:
+			
+		if direction.length() > CHEW_DISTANCE:
 			move_and_slide(
 				direction.normalized() * speed,
 				Vector3.UP)
@@ -74,6 +101,18 @@ func _physics_process(dt):
 				_look_at_pos = path_target
 			
 			look_at(_look_at_pos,Vector3.UP)
+			
+func chewing():
+	return chewing_sound.playing
+	
+func start_chewing():
+	chew()
+	chewing_sound.play()
+	chew_timer.start()
+	
+func stop_chewing():
+	chewing_sound.playing = false
+	chew_timer.stop()
 
 func move_to(target_pos):
 	_path_node = 0
@@ -105,6 +144,10 @@ func _update_health():
 func die():
 	emit_signal("on_dead")
 	queue_free()
+	
+func chew():
+	if _target and _target.has_method("hurt"):
+		_target.hurt(chew_damage)
 
 func _on_Hitbox_hit(damage):
 	curr_health -= damage
@@ -118,3 +161,7 @@ func _on_ThinkTimer_timeout():
 
 func _on_Zombie_tree_entered():
 	think()
+
+func _on_ChewTimer_timeout():
+	if chewing():
+		chew()
