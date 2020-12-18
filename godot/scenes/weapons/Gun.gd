@@ -24,8 +24,28 @@ func _update_ammo_labels():
 	var ammo_str = str(ammo)
 	$AmmoLabelLeft.set_label_text(ammo_str)
 	$AmmoLabelRight.set_label_text(ammo_str)
+	
+func _update_ammo_label_visibility():
+	var ll_v = Quat($AmmoLabelLeft.global_transform.basis) * Vector3.FORWARD
+	var rl_v = Quat($AmmoLabelRight.global_transform.basis) * Vector3.FORWARD
+	var camera_v = Quat(vr.vrCamera.global_transform.basis) * Vector3.FORWARD
+	
+	# dot product tells us cosine of angle between label normal and camera
+	# normal. this allows us to make the ammo labels less transparent when
+	# the player is looking at the gun.
+	var ll_visibility = ll_v.dot(camera_v)
+	var rl_visibility = rl_v.dot(camera_v)
+	
+	var ll_font = $AmmoLabelLeft.font_color
+	ll_font.a = Utils.map(ll_visibility,0.25,0.75,0.0,1.0)
+	$AmmoLabelLeft.ui_label.add_color_override("font_color", ll_font)
+	var rl_font = $AmmoLabelRight.font_color
+	rl_font.a = Utils.map(rl_visibility,0.25,0.75,0.0,1.0)
+	$AmmoLabelRight.ui_label.add_color_override("font_color", rl_font)
 
 func _physics_process(delta):
+	_update_ammo_label_visibility()
+	
 	if not is_grabbed:
 		if _bound_controller:
 			# unbind the controller once gun is dropped
