@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/ui/HUD_UI/HUD_UI.gd"
 }, {
-"base": "ProgressBar",
+"base": "TextureProgress",
 "class": "HealthBar",
 "language": "GDScript",
 "path": "res://scenes/ui/HealthBar/HealthBar.gd"
